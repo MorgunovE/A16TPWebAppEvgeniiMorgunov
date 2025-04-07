@@ -13,13 +13,11 @@ namespace A16TPWebAppEvgeniiMorgunov.Data
             using var context = new ApplicationDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>());
 
-            // Vérifier si la base de données contient déjà des données
             if (context.Users.Any() || context.Livres.Any())
             {
-                return; // La base de données a déjà été initialisée
+                return; 
             }
 
-            // Ajouter des utilisateurs
             var users = new User[]
             {
                 new User {
@@ -44,7 +42,6 @@ namespace A16TPWebAppEvgeniiMorgunov.Data
             context.Users.AddRange(users);
             context.SaveChanges();
 
-            // Ajouter des livres
             var livres = new Livre[]
             {
                 new Livre {
@@ -78,7 +75,6 @@ namespace A16TPWebAppEvgeniiMorgunov.Data
             context.Livres.AddRange(livres);
             context.SaveChanges();
 
-            // Créer des paniers pour les utilisateurs
             var baskets = new Basket[]
             {
                 new Basket { UserId = 1 },
@@ -88,7 +84,6 @@ namespace A16TPWebAppEvgeniiMorgunov.Data
             context.Baskets.AddRange(baskets);
             context.SaveChanges();
 
-            // Ajouter des livres aux paniers
             var basketLivres = new BasketLivre[]
             {
                 new BasketLivre { BasketId = 1, LivreId = 1 },
