@@ -157,7 +157,6 @@ namespace A16TPWebAppEvgeniiMorgunov.Controllers
 
             if (basket != null)
             {
-                // Supprimer d'abord les relations dans BasketLivre
                 if (basket.BasketLivres != null && basket.BasketLivres.Any())
                 {
                     _context.BasketLivres.RemoveRange(basket.BasketLivres);
@@ -208,18 +207,15 @@ namespace A16TPWebAppEvgeniiMorgunov.Controllers
                 return BadRequest();
             }
 
-            // Vérifier si le livre est déjà dans le panier
             var basketLivre = await _context.BasketLivres
                 .FirstOrDefaultAsync(bl => bl.BasketId == basketId && bl.LivreId == livreId);
 
             if (basketLivre != null)
             {
-                // Mettre à jour la quantité
                 basketLivre.Quantity += quantity;
             }
             else
             {
-                // Ajouter le nouveau livre au panier
                 basketLivre = new BasketLivre
                 {
                     BasketId = basketId,

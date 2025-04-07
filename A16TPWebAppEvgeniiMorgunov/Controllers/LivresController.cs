@@ -32,7 +32,6 @@ namespace A16TPWebAppEvgeniiMorgunov.Controllers
             ViewData["CurrentMinPrice"] = minPrice;
             ViewData["CurrentMaxPrice"] = maxPrice;
 
-            // Obtenir les genres uniques pour le filtre
             ViewData["Genres"] = await _context.Livres
                 .Select(l => l.Genre)
                 .Distinct()
@@ -41,7 +40,6 @@ namespace A16TPWebAppEvgeniiMorgunov.Controllers
 
             var livres = from l in _context.Livres select l;
 
-            // Appliquer les filtres
             if (!string.IsNullOrEmpty(searchString))
             {
                 livres = livres.Where(s => (s.Title != null && s.Title.Contains(searchString))
@@ -104,7 +102,6 @@ namespace A16TPWebAppEvgeniiMorgunov.Controllers
             if (ModelState.IsValid)
             {
                 string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "livre");
-                // Créer le dossier s'il n'existe pas
                 if (!Directory.Exists(uploadsFolder))
                     Directory.CreateDirectory(uploadsFolder);
 
@@ -156,19 +153,15 @@ namespace A16TPWebAppEvgeniiMorgunov.Controllers
             {
                 try
                 {
-                    // Récupérer l'image existante
                     var existingLivre = await _context.Livres.AsNoTracking().FirstOrDefaultAsync(l => l.Id == id);
                     string oldImageName = existingLivre?.Image;
 
-                    // Gérer le téléchargement de la nouvelle image
                     if (imageFile != null && imageFile.Length > 0)
                     {
                         string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "livre");
-                        // Créer le dossier s'il n'existe pas
                         if (!Directory.Exists(uploadsFolder))
                             Directory.CreateDirectory(uploadsFolder);
 
-                        // Supprimer l'ancienne image si elle existe
                         if (!string.IsNullOrEmpty(oldImageName))
                         {
                             string oldFilePath = Path.Combine(uploadsFolder, oldImageName);
@@ -188,7 +181,6 @@ namespace A16TPWebAppEvgeniiMorgunov.Controllers
                     }
                     else
                     {
-                        // Conserver l'image existante si aucune nouvelle n'est fournie
                         livre.Image = oldImageName;
                     }
 
@@ -237,7 +229,6 @@ namespace A16TPWebAppEvgeniiMorgunov.Controllers
             var livre = await _context.Livres.FindAsync(id);
             if (livre != null)
             {
-                // Supprimer l'image associée si elle existe
                 if (!string.IsNullOrEmpty(livre.Image))
                 {
                     string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "livre");
