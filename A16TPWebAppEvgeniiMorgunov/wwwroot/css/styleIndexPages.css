@@ -233,6 +233,7 @@ h2 {
 
 .white-bg {
     background-color: #fff;
+    border-radius: 10px;
 }
 
 .grey-bg {
