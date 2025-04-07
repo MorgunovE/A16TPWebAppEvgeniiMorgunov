@@ -1,32 +1,41 @@
 ﻿@model A16TPWebAppEvgeniiMorgunov.Models.Basket
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Créer un Panier";
 }
 
-<h1>Create</h1>
+<h1>Créer un Panier</h1>
 
-<h4>Basket</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Nouveau Panier</h4>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="UserId" class="control-label">Utilisateur</label>
+                        <select asp-for="UserId" class="form-control form-select" asp-items="ViewBag.UserId">
+                            <option value="">-- Sélectionnez un utilisateur --</option>
+                        </select>
+                        <span asp-validation-for="UserId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <button type="submit" class="btn btn-primary">Créer</button>
+                        <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

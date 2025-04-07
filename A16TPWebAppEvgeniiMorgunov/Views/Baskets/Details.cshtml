@@ -1,24 +1,94 @@
 ﻿@model A16TPWebAppEvgeniiMorgunov.Models.Basket
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Détails du Panier";
 }
 
-<h1>Details</h1>
+<h1>Détails du Panier</h1>
 
-<div>
-    <h4>Basket</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.User.Email)
-        </dd>
-    </dl>
+<div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Panier de @Model.User?.Name @Model.User?.FamilyName</h4>
+    </div>
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Utilisateur</dt>
+            <dd class="col-sm-9">@Model.User?.Name @Model.User?.FamilyName</dd>
+
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Model.User?.Email</dd>
+        </dl>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4>Articles dans le panier</h4>
+    <a asp-action="AddLivre" asp-route-basketId="@Model.Id" class="btn btn-success">
+        <i class="bi bi-plus"></i> Ajouter un livre
+    </a>
+</div>
+
+@if (Model.BasketLivres != null && Model.BasketLivres.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Titre</th>
+                    <th>Auteur</th>
+                    <th>Prix unitaire</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.BasketLivres)
+                {
+                    var price = item.Livre?.Price ?? 0;
+                    var totalPrice = price * item.Quantity;
+
+                    <tr>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.Livre?.Image))
+                            {
+                                <img src="~/images/livre/@item.Livre.Image" alt="@item.Livre.Title" style="height: 50px; max-width: 50px;" />
+                            }
+                        </td>
+                        <td>@item.Livre?.Title</td>
+                        <td>@item.Livre?.Author</td>
+                        <td>@price.ToString("C")</td>
+                        <td>@item.Quantity</td>
+                        <td>@totalPrice.ToString("C")</td>
+                        <td>
+                            <form asp-action="RemoveLivre" method="post">
+                                <input type="hidden" name="basketId" value="@Model.Id" />
+                                <input type="hidden" name="livreId" value="@item.Livre?.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">Retirer</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="5" class="text-end">Total du panier:</th>
+                    <th>@Model.BasketLivres.Sum(bl => (bl.Livre?.Price ?? 0) * bl.Quantity).ToString("C")</th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        Ce panier est vide. Ajoutez des livres pour commencer.
+    </div>
+}
+
+<div class="mt-4">
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Modifier</a>
+    <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
 </div>
