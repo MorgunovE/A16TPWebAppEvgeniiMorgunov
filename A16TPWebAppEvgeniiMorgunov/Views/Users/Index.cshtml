@@ -1,53 +1,35 @@
 ﻿@model IEnumerable<A16TPWebAppEvgeniiMorgunov.Models.User>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Utilisateurs";
 }
 
-<h1>Index</h1>
+<h1>Utilisateurs</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary mb-3">Créer un nouvel utilisateur</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FamilyName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FamilyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name @item.FamilyName</h5>
+                    <div class="card-text">
+                        <p><strong>Téléphone:</strong> @item.Tel</p>
+                        <p><strong>Email:</strong> @item.Email</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group" role="group">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Modifier</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Détails</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Supprimer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
