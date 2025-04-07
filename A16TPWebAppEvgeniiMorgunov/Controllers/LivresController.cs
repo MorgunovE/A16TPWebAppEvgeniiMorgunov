@@ -91,31 +91,32 @@ namespace A16TPWebAppEvgeniiMorgunov.Controllers
         }
 
         // POST: Livres/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Description,Author,Genre,Price,Quantity")] Livre livre, IFormFile imageFile)
         {
+            if (imageFile == null || imageFile.Length == 0)
+            {
+                ModelState.AddModelError("imageFile", "Une image est obligatoire");
+                return View(livre);
+            }
+
             if (ModelState.IsValid)
             {
-                // Gérer le téléchargement de l'image
-                if (imageFile != null && imageFile.Length > 0)
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "livre");
+                // Créer le dossier s'il n'existe pas
+                if (!Directory.Exists(uploadsFolder))
+                    Directory.CreateDirectory(uploadsFolder);
+
+                string uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-                    // Créer le dossier s'il n'existe pas
-                    if (!Directory.Exists(uploadsFolder))
-                        Directory.CreateDirectory(uploadsFolder);
-
-                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await imageFile.CopyToAsync(fileStream);
-                    }
-
-                    livre.Image = uniqueFileName;
+                    await imageFile.CopyToAsync(fileStream);
                 }
+
+                livre.Image = uniqueFileName;
 
                 _context.Add(livre);
                 await _context.SaveChangesAsync();
@@ -123,6 +124,7 @@ namespace A16TPWebAppEvgeniiMorgunov.Controllers
             }
             return View(livre);
         }
+
 
         // GET: Livres/Edit/5
         public async Task<IActionResult> Edit(long? id)
@@ -161,7 +163,7 @@ namespace A16TPWebAppEvgeniiMorgunov.Controllers
                     // Gérer le téléchargement de la nouvelle image
                     if (imageFile != null && imageFile.Length > 0)
                     {
-                        string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                        string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "livre");
                         // Créer le dossier s'il n'existe pas
                         if (!Directory.Exists(uploadsFolder))
                             Directory.CreateDirectory(uploadsFolder);
@@ -238,7 +240,7 @@ namespace A16TPWebAppEvgeniiMorgunov.Controllers
                 // Supprimer l'image associée si elle existe
                 if (!string.IsNullOrEmpty(livre.Image))
                 {
-                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "livre");
                     string filePath = Path.Combine(uploadsFolder, livre.Image);
                     if (System.IO.File.Exists(filePath))
                         System.IO.File.Delete(filePath);
