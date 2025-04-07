@@ -1,71 +1,97 @@
 ﻿@model IEnumerable<A16TPWebAppEvgeniiMorgunov.Models.Livre>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Catalogue de Livres";
 }
 
-<h1>Index</h1>
+<h1>Catalogue de Livres</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Créer un nouveau livre</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Image)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<div class="row mb-3">
+    <div class="col">
+        <form asp-action="Index" method="get" class="form-inline">
+            <div class="input-group mb-2 mr-sm-2">
+                <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="form-control" placeholder="Rechercher par titre ou auteur" />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Rechercher</button>
+                </div>
+            </div>
+
+            @if (ViewData["Genres"] is List<string> genres && genres.Any())
+            {
+                <div class="input-group mb-2 mr-sm-2">
+                    <select name="genre" class="form-control">
+                        <option value="">Tous les genres</option>
+                        @foreach (var genre in genres)
+                        {
+                            <option value="@genre" selected="@(ViewData["CurrentGenre"]?.ToString() == genre)">@genre</option>
+                        }
+                    </select>
+                </div>
+            }
+
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Prix min</span>
+                </div>
+                <input type="number" name="minPrice" value="@ViewData["CurrentMinPrice"]" min="0" step="0.01" class="form-control" />
+            </div>
+
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Prix max</span>
+                </div>
+                <input type="number" name="maxPrice" value="@ViewData["CurrentMaxPrice"]" min="0" step="0.01" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary mb-2">Filtrer</button>
+            <a asp-action="Index" class="btn btn-secondary mb-2 ml-2">Réinitialiser</a>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                @if (!string.IsNullOrEmpty(item.Image))
+                {
+                    <img src="~/images/livre/@item.Image" class="card-img-top" alt="@item.Title" style="height: 200px; object-fit: contain;">
+                }
+                else
+                {
+                    <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                        <span class="text-muted">Pas d'image</span>
+                    </div>
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <strong>Auteur:</strong> @item.Author<br />
+                            <strong>Genre:</strong> @item.Genre
+                        </small>
+                    </p>
+                    <p class="card-text">@(item.Description?.Length > 100 ? item.Description.Substring(0, 100) + "..." : item.Description)</p>
+                    <p class="card-text">
+                        <strong>Prix:</strong> @item.Price.ToString("C")
+                    </p>
+                    <p class="card-text">
+                        <strong>Disponible:</strong> @item.Quantity
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group" role="group">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Modifier</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Détails</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Supprimer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
