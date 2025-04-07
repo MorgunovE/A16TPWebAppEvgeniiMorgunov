@@ -63,9 +63,9 @@ header {
     transition: color 0.3s;
 }
 
-    .menu-nav button:hover, .menu-nav-mobile button:hover {
-        color: #e55039;
-    }
+.menu-nav button:hover, .menu-nav-mobile button:hover {
+    color: #e55039;
+}
 
 .menu-toggle {
     display: none;
@@ -83,9 +83,9 @@ header {
     transition: background-color 0.3s;
 }
 
-    .btn:hover {
-        background-color: #c23616;
-    }
+.btn:hover {
+    background-color: #c23616;
+}
 
 /* Bloc principal */
 .main-block {
@@ -154,12 +154,12 @@ header {
     transition: transform 0.5s ease-in-out;
 }
 
-    .gallery_main-block img {
-        width: 100%;
-        height: 550px;
-        object-fit: cover;
-        flex-shrink: 0;
-    }
+.gallery_main-block img {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
 
 .prev-btn_main-block, .next-btn_main-block {
     position: absolute;
@@ -183,9 +183,9 @@ header {
     right: 10px;
 }
 
-    .prev-btn_main-block:hover, .next-btn_main-block:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-    }
+.prev-btn_main-block:hover, .next-btn_main-block:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
 
 .text_offer-block {
     margin-bottom: 10px;
@@ -203,9 +203,9 @@ header {
     transition: background-color 0.3s;
 }
 
-    .btn_offer-block:hover {
-        background-color: #c23616;
-    }
+.btn_offer-block:hover {
+    background-color: #c23616;
+}
 
 /* Sections catalogue */
 h2 {
@@ -224,12 +224,12 @@ h2 {
     gap: 40px;
 }
 
-    .catalog-block img {
-        flex: 1;
-        max-width: 45%;
-        border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+.catalog-block img {
+    flex: 1;
+    max-width: 45%;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
 .white-bg {
     background-color: #fff;
@@ -273,23 +273,23 @@ h2 {
     min-width: 250px;
 }
 
-    .form-card h3, .contact-info-card h3 {
-        margin-bottom: 20px;
-        font-size: 1.5rem;
-        text-align: center;
-    }
+.form-card h3, .contact-info-card h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+}
 
 .form-group {
     margin-bottom: 15px;
 }
 
-    .form-group input, .form-group textarea {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 16px;
-    }
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
 
 .submit-btn {
     background-color: #e55039;
@@ -303,9 +303,9 @@ h2 {
     transition: background-color 0.3s;
 }
 
-    .submit-btn:hover {
-        background-color: #c23616;
-    }
+.submit-btn:hover {
+    background-color: #c23616;
+}
 
 .contact-info-card p {
     margin-bottom: 10px;
@@ -348,12 +348,12 @@ h2 {
     margin-top: 20px;
 }
 
-    .map img {
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+.map img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
 /* Modal */
 .modal {
@@ -384,9 +384,9 @@ h2 {
     cursor: pointer;
 }
 
-    .close-btn:hover {
-        color: #333;
-    }
+.close-btn:hover {
+    color: #333;
+}
 
 .return-btn {
     background-color: #e55039;
@@ -400,26 +400,26 @@ h2 {
     transition: background-color 0.3s;
 }
 
-    .return-btn:hover {
-        background-color: #c23616;
-    }
+.return-btn:hover {
+    background-color: #c23616;
+}
 
 /* Pied de page */
 footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 60px; /* Définir une hauteur fixe */
-    line-height: 60px; /* Centrer verticalement le texte */
+    height: 60px; 
+    line-height: 60px; 
     background-color: #333;
     color: white;
     text-align: center;
-    z-index: 1000; /* S'assurer que le footer reste au-dessus des autres éléments */
+    z-index: 1000; 
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .container-fluid {
-    margin-bottom: 60px; /* Ajouter une marge pour éviter que le contenu ne soit caché derrière le footer */
+    margin-bottom: 60px;
 }
 
 .btn-group {
@@ -438,10 +438,10 @@ footer {
         padding: 30px 20px;
     }
 
-        .catalog-block img {
-            max-width: 100%;
-            margin-bottom: 20px;
-        }
+    .catalog-block img {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
 
     #account.catalog-block {
         flex-direction: column-reverse;
@@ -466,18 +466,18 @@ footer {
         transition: height 0.3s ease;
     }
 
-        .menu-nav-mobile.show {
-            height: auto;
-        }
+    .menu-nav-mobile.show {
+        height: auto;
+    }
 
-        .menu-nav-mobile ul {
-            list-style: none;
-            padding: 15px;
-        }
+    .menu-nav-mobile ul {
+        list-style: none;
+        padding: 15px;
+    }
 
-        .menu-nav-mobile li {
-            margin-bottom: 10px;
-        }
+    .menu-nav-mobile li {
+        margin-bottom: 10px;
+    }
 
     .form-card, .contact-info-card {
         min-width: 100%;

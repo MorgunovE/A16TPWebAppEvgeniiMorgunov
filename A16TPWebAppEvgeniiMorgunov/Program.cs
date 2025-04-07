@@ -9,17 +9,14 @@ namespace A16TPWebAppEvgeniiMorgunov
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            // Ajouter la configuration de la base de données
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
-            // Initialiser les données de test
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -34,7 +31,6 @@ namespace A16TPWebAppEvgeniiMorgunov
                 }
             }
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");

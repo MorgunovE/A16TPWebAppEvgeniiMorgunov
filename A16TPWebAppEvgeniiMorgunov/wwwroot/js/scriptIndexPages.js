@@ -53,8 +53,6 @@
         contactForm.addEventListener('submit', function (event) {
             event.preventDefault();
 
-            // Ici vous pourriez ajouter du code pour envoyer les données du formulaire
-            // par AJAX à votre contrôleur
 
             // Afficher le modal
             if (modal) modal.style.display = 'block';
@@ -76,7 +74,7 @@
         });
     }
 
-    // Fermer le modal si on clique en dehors du contenu
+    // Fermer le modal
     window.addEventListener('click', function (event) {
         if (modal && event.target === modal) {
             modal.style.display = 'none';
