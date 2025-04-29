@@ -5,7 +5,7 @@
     const nextBtn = document.querySelector('.next-btn_main-block');
     const images = gallery.querySelectorAll('img');
     let currentIndex = 0;
-    const imageWidth = 100; // en pourcentage
+    const imageWidth = 100;
 
     // Initialiser le slider
     function updateSlider() {
@@ -52,7 +52,6 @@
     if (contactForm) {
         contactForm.addEventListener('submit', function (event) {
             event.preventDefault();
-
 
             // Afficher le modal
             if (modal) modal.style.display = 'block';

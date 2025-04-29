@@ -15,7 +15,7 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #f4f4f4;
-    margin-bottom: 60px; /* Hauteur du footer */
+    margin-bottom: 60px;
 }
 
 a {
@@ -45,9 +45,9 @@ header {
     padding: 15px 0;
 }
 
-    .menu-bar img {
-        height: 50px;
-    }
+.menu-bar img {
+    height: 50px;
+}
 
 .menu-nav ul {
     display: flex;
@@ -427,6 +427,7 @@ footer {
     justify-content: space-between;
     gap: 10px;
 }
+
 /* Media Queries pour Responsive Design */
 @media (max-width: 992px) {
     .container_main-block {

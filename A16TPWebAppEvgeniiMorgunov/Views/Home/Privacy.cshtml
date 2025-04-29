@@ -1,6 +1,78 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Politique de Confidentialité";
 }
-<h1>@ViewData["Title"]</h1>
+<div class="privacy-container">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h2>Introduction</h2>
+        </div>
+        <div class="card-body">
+            <p>Bienvenue sur la politique de confidentialité de la Librairie en Ligne. </p>
+        </div>
+    </div>
+
+    <div class="card mb-5">
+        <div class="card-header bg-success text-white">
+            <h2>Nous contacter</h2>
+        </div>
+        <div class="card-body">
+            <p>Si vous avez des questions concernant cette politique de confidentialité, veuillez nous contacter :</p>
+            <ul>
+                <li>Par email: confidentialite@cataloguedelivres.ca</li>
+                <li>Par téléphone: +1 465 213 2132</li>
+                <li>Par courrier: Librairie en Ligne, 123 Rue du Livre, Montreal</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+    .privacy-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px 15px;
+    }
+
+    .card {
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    }
+
+    .card-header {
+        border-top-left-radius: 8px !important;
+        border-top-right-radius: 8px !important;
+        padding: 1rem;
+    }
+
+    .card-header h2 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    h4 {
+        color: #e55039;
+        margin-top: 1.5rem;
+    }
+
+    h5 {
+        color: #333;
+        margin-top: 1rem;
+    }
+
+    ul {
+        margin-bottom: 1.5rem;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
